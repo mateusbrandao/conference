@@ -5,13 +5,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Registro</title>
+	<meta charset="ISO-8859-1">
+	<title>Registro</title>
+	<style>
+		.error{
+			color: #ff0000;
+		}
+		
+		.errorblock{
+			color: #000;
+			background-color: #ffEEEE;
+			border: 3px solid #ff0000;
+			padding: 8px;
+			margin: 16px;
+		}
+		
+	</style>
 </head>
 <body>
 	<spring:message code="title" var="title" />
 	<h1>${title}</h1>
 	<form:form modelAttribute="registration">
+		<form:errors path="*" cssClass="errorblock" element="div" />
 		<table>
 			<tr>
 				<td>

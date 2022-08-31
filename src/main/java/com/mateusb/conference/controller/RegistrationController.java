@@ -1,7 +1,9 @@
 package com.mateusb.conference.controller;
 
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,11 +17,18 @@ public class RegistrationController {
 	public String getRegistration(@ModelAttribute("registration") Registration registrations) {
 		return "registration";
 	}
-	
+
 	@PostMapping("registration")
-	public String addRegistration(@ModelAttribute("registration") Registration registrations) {
-		System.out.println("Registration "+registrations.getName());
+	public String addRegistration(@Valid @ModelAttribute("registration") Registration registrations,
+			BindingResult result) {
+		
+		if(result.hasErrors()) {
+			System.out.println("Erro no envio!");
+			return "registration";
+		}
+		
+		System.out.println("Registration " + registrations.getName());
 		return "redirect:registration";
 	}
-	
+
 }
